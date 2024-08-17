@@ -1,38 +1,76 @@
-.App {
+/* src/App.css */.App {
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.carousel-container {
+  margin-bottom: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.about-section {
+  padding: 40px0;
+  background-color: #f8f9fa;
+}
+
+.about-sectionh2 {
+  margin-bottom: 20px;
+}
+
+.teachers-section {
+  padding: 40px0;
+}
+
+.teachers-sectionh2 {
+  margin-bottom: 20px;
+}
+
+.teacher-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.teacher-card {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 02px8pxrgba(0, 0, 0, 0.1);
+  margin: 15px;
+  padding: 20px;
+  width: 250px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.teacher-cardimg {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.teacher-cardh2 {
+  margin: 10px0;
+}
+
+.teacher-cardp {
+  margin: 5px0;
+}
+
+.teacher-cardul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.teacher-cardulli {
+  background-color: #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 3px0;
+}
+
+.footer {
+  padding: 20px0;
+  text-align: center;
 }

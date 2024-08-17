@@ -1,13 +1,36 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+
+.admin-dashboard {
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.admin-dashboard h1 {
+  font-size: 2.5rem;
+  color: #343a40;
+}
+
+.admin-dashboard .card {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+}
+
+.admin-dashboard .card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-dashboard .form-control {
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard .btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+}
+
+.admin-dashboard .btn-danger {
+  border-radius: 5px;
 }
