@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Carousel } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import AdminDashboard from './Admin/AdminDashboard';
@@ -10,6 +10,7 @@ import axios from 'axios';
 
 function App() {
   const [carouselItems, setCarouselItems] = useState([]);
+  const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
     const fetchCarouselItems = async () => {
@@ -21,14 +22,32 @@ function App() {
       }
     };
 
+    const fetchTeachers = async () => {
+      try {
+        const response = await axios.get('https://elearning-backend-gcsf.onrender.com/api/teachers');
+        setTeachers(response.data);
+      } catch (error) {
+        console.error('Error fetching the teachers', error);
+      }
+    };
+
     fetchCarouselItems();
+    fetchTeachers();
   }, []);
+
+  const groupTeachers = (teachers) => {
+    const grouped = [];
+    for (let i = 0; i < teachers.length; i += 3) {
+      grouped.push(teachers.slice(i, i + 3));
+    }
+    return grouped;
+  };
 
   return (
     <Router>
       <div className="App">
-        {/* Navigation Bar */}
-        <Navbar bg="green" variant="green" expand="lg">
+
+        <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand href="/">E-Learning Platform</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -56,7 +75,7 @@ function App() {
             path="/"
             element={
               <>
-                {/* Carousel */}
+
                 <Carousel className="carousel-container">
                   {carouselItems.map((item) => (
                     <Carousel.Item key={item._id}>
@@ -73,25 +92,40 @@ function App() {
                   ))}
                 </Carousel>
 
-                {/* Site Description */}
-                <section id="about" className="about-section">
-                  <Container>
-                    <h2>About Our Platform</h2>
-                    <p>
-                      Our e-learning platform offers a variety of courses across
-                      different subjects. Our experienced teachers are here to guide
-                      you through interactive lessons, helping you to achieve your
-                      educational goals. Whether you're looking to improve your
-                      skills or learn something new, we have something for everyone.
-                    </p>
-                  </Container>
-                </section>
-
-                {/* Main Content: Teacher List */}
-                <section id="teachers" className="teachers-section">
+                
+                <section id="teachers" className="teachers-section mt-5">
                   <Container>
                     <h2>Our Teachers</h2>
-                    <TeacherList />
+                    <Carousel>
+                      {groupTeachers(teachers).map((teacherGroup, index) => (
+                        <Carousel.Item key={index}>
+                          <div className="row">
+                            {teacherGroup.map((teacher) => (
+                              <div key={teacher._id} className="col-4">
+                                <Link to={`/teacher/${teacher._id}`} className="text-decoration-none">
+                                  <div className="card mb-3">
+                                    <div className="fixed-image">
+                                      {teacher.photo ? (
+                                        <img
+                                          src={`https://elearning-backend-gcsf.onrender.com${teacher.photo}`}
+                                          alt={teacher.name}
+                                        />
+                                      ) : (
+                                        <div className="fixed-image-placeholder">No Image</div>
+                                      )}
+                                    </div>
+                                    <div className="card-body">
+                                      <h5 className="card-title">{teacher.name}</h5>
+                                      <p className="card-text">{teacher.description}</p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </div>
+                            ))}
+                          </div>
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
                   </Container>
                 </section>
               </>

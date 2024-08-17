@@ -35,7 +35,6 @@ function TeacherProfile() {
     fetchComments();
   }, [id]);
 
-  // Define the handleCommentSubmit function
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!newComment.trim()) return;
@@ -54,12 +53,15 @@ function TeacherProfile() {
   if (error) return <p>{error}</p>;
   if (!teacher) return <p>Loading...</p>;
 
+  // Log the image URL to the console outside JSX
+  console.log(teacher.photo ? `https://elearning-backend-gcsf.onrender.com${teacher.photo}` : '/path/to/default/image.jpg');
+
   return (
     <div className="teacher-profile p-6">
       <div className="teacher-details flex">
         <div className="flex-shrink-0">
           <img
-            src={`https://elearning-backend-gcsf.onrender.com${teacher.photo}`}
+            src={teacher.photo ? `https://elearning-backend-gcsf.onrender.com${teacher.photo}` : '/path/to/default/image.jpg'}
             alt={teacher.name}
             className="w-full h-auto max-w-sm object-cover rounded-md"
           />
