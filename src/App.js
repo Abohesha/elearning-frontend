@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const fetchCarouselItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/carousel-items');
+        const response = await axios.get('https://elearning-backend-gcsf.onrender.com/api/carousel-items');
         setCarouselItems(response.data);
       } catch (error) {
         console.error('Error fetching the carousel items', error);

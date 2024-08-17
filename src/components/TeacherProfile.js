@@ -13,7 +13,7 @@ function TeacherProfile() {
   useEffect(() => {
     const fetchTeacher = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/teachers/${id}`);
+        const response = await axios.get(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}`);
         setTeacher(response.data);
       } catch (error) {
         setError('Teacher not found');
@@ -23,7 +23,7 @@ function TeacherProfile() {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/teachers/${id}/comments`);
+        const response = await axios.get(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`);
         setComments(response.data);
       } catch (error) {
         setError('Comments not found');
@@ -41,7 +41,7 @@ function TeacherProfile() {
     if (!newComment.trim()) return;
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/teachers/${id}/comments`, {
+      const response = await axios.post(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`, {
         text: newComment,
       });
       setComments((prevComments) => [...prevComments, response.data]);
