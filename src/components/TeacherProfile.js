@@ -59,7 +59,7 @@ function TeacherProfile() {
       <div className="teacher-details flex">
         <div className="flex-shrink-0">
           <img
-            src={`http://localhost:5000${teacher.photo}`}
+            src={`https://elearning-backend-gcsf.onrender.com${teacher.photo}`}
             alt={teacher.name}
             className="w-full h-auto max-w-sm object-cover rounded-md"
           />

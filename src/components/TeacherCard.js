@@ -5,7 +5,7 @@ import StarRating from './StarRating';
 const TeacherCard = ({ teacher }) => {
   return (
     <div className="teacher-card bg-white p-4 rounded-lg shadow-md">
-      <img src={`http://localhost:5000${teacher.photo}`} alt="Uploaded" className="w-full h-40 object-cover rounded-md" />
+      <img src={`https://elearning-backend-gcsf.onrender.com${teacher.photo}`} alt="Uploaded" className="w-full h-40 object-cover rounded-md" />
       <h2 className="text-xl font-semibold mt-4">{teacher.name}</h2>
       <p className="text-gray-600 mt-2">{teacher.description}</p>
       <p className="text-gray-800 mt-2">Rating: {<StarRating rating={teacher.rating} />}</p>

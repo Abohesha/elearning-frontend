@@ -9,7 +9,7 @@ function ManageTeachers() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/teachers');
+        const response = await axios.get('https://elearning-backend-gcsf.onrender.com/api/teachers');
         setTeachers(response.data);
       } catch (error) {
         console.error('Error fetching the teachers', error);
@@ -21,7 +21,7 @@ function ManageTeachers() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/teachers/${id}`);
+      await axios.delete(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}`);
       setTeachers(teachers.filter((teacher) => teacher._id !== id));
     } catch (error) {
       console.error('Error deleting teacher', error);

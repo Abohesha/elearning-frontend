@@ -62,7 +62,7 @@ function App() {
                     <Carousel.Item key={item._id}>
                       <img
                         className="d-block w-100"
-                        src={`http://localhost:5000${item.imageUrl}`}
+                        src={`https://elearning-backend-gcsf.onrender.com${item.imageUrl}`}
                         alt={item.title}
                       />
                       <Carousel.Caption>

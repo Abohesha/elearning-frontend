@@ -12,7 +12,7 @@ function CarouselItemForm({ setCarouselItems }) {
     formData.append('image', image);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/upload', formData, {
+      const res = await axios.post('https://elearning-backend-gcsf.onrender.com/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -31,7 +31,7 @@ function CarouselItemForm({ setCarouselItems }) {
 
     try {
       const newItem = { title, description, imageUrl };
-      const response = await axios.post('http://localhost:5000/api/carousel-items', newItem);
+      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/carousel-items', newItem);
       setCarouselItems((prevItems) => [...prevItems, response.data]);
       setTitle('');
       setDescription('');

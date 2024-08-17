@@ -14,7 +14,7 @@ function TeacherForm({ setTeachers }) {
     formData.append('image', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload', formData, {
+      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -31,7 +31,7 @@ function TeacherForm({ setTeachers }) {
     const newTeacher = { name, description, photo, rating }; // Include the photo URL
 
     try {
-      const response = await axios.post('http://localhost:5000/api/teachers', newTeacher);
+      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/teachers', newTeacher);
       setTeachers((prevTeachers) => [...prevTeachers, response.data]);
       setName('');
       setDescription('');

@@ -8,7 +8,7 @@ function ManageCarouselItems() {
   useEffect(() => {
     const fetchCarouselItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/carousel-items');
+        const response = await axios.get('https://elearning-backend-gcsf.onrender.com/api/carousel-items');
         setCarouselItems(response.data);
       } catch (error) {
         console.error('Error fetching the carousel items', error);
@@ -20,7 +20,7 @@ function ManageCarouselItems() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/carousel-items/${id}`);
+      await axios.delete(`https://elearning-backend-gcsf.onrender.com/api/carousel-items/${id}`);
       setCarouselItems(carouselItems.filter((item) => item._id !== id));
     } catch (error) {
       console.error('Error deleting carousel item', error);

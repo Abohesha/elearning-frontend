@@ -8,7 +8,7 @@ function ManageSubjects() {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/subjects');
+        const response = await axios.get('https://elearning-backend-gcsf.onrender.com/api/subjects');
         setSubjects(response.data);
       } catch (error) {
         console.error('Error fetching the subjects', error);
@@ -20,7 +20,7 @@ function ManageSubjects() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/subjects/${id}`);
+      await axios.delete(`https://elearning-backend-gcsf.onrender.com/api/subjects/${id}`);
       setSubjects(subjects.filter((subject) => subject._id !== id));
     } catch (error) {
       console.error('Error deleting subject', error);

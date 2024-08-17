@@ -9,7 +9,7 @@ function SubjectForm({ setSubjects }) {
     e.preventDefault();
     try {
       const newSubject = { name, description };
-      const response = await axios.post('http://localhost:5000/api/subjects', newSubject);
+      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/subjects', newSubject);
       setSubjects((prevSubjects) => [...prevSubjects, response.data]);
       setName('');
       setDescription('');
