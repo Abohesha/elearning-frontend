@@ -44,7 +44,7 @@ function ManageTeachers() {
             <button
               className="text-red-500 hover:text-red-700"
               onClick={() => handleDelete(teacher._id)}
-            >
+             >
               Delete
             </button>
           </li>

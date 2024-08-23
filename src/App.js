@@ -46,7 +46,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
         <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand href="/">E-Learning Platform</Navbar.Brand>
@@ -75,7 +74,6 @@ function App() {
             path="/"
             element={
               <>
-
                 <Carousel className="carousel-container">
                   {carouselItems.map((item) => (
                     <Carousel.Item key={item._id}>
@@ -92,7 +90,6 @@ function App() {
                   ))}
                 </Carousel>
 
-                
                 <section id="teachers" className="teachers-section mt-5">
                   <Container>
                     <h2>Our Teachers</h2>
@@ -107,7 +104,7 @@ function App() {
                                     <div className="fixed-image">
                                       {teacher.photo ? (
                                         <img
-                                          src={`https://elearning-backend-gcsf.onrender.com${teacher.photo}`}
+                                          src={teacher.photo.startsWith('http') ? teacher.photo : `https://elearning-backend-gcsf.onrender.com${teacher.photo}`}
                                           alt={teacher.name}
                                         />
                                       ) : (

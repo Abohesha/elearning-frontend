@@ -1,28 +1,51 @@
 import React, { useState } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDQhSnpynkj54_LFAWLFenQhUbJ4xiW_v4",
+  authDomain: "elearning-1a781.firebaseapp.com",
+  projectId: "elearning-1a781",
+  storageBucket: "elearning-1a781.appspot.com",
+  messagingSenderId: "96253078189",
+  appId: "1:96253078189:web:db49824200eddc9eec7424",
+  measurementId: "G-CNJJD5QLHM"
+};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 function TeacherForm({ setTeachers }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState(null); 
   const [rating, setRating] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
 
-  // Add the handleImageUpload function here
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
+    if (!file) return;
+
+    setIsUploading(true);
+
+    // Create a storage reference from Firebase storage
+    const storageRef = ref(storage, `images/${file.name}`);
 
     try {
-      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Uploaded image URL:', response.data.imageUrl); // Log the image URL
-      setPhoto(response.data.imageUrl); // Set the photo URL
+      // Upload the file to Firebase Storage
+      await uploadBytes(storageRef, file);
+
+      // Get the download URL for the uploaded file
+      const fileUrl = await getDownloadURL(storageRef);
+
+      console.log('Uploaded image URL:', fileUrl);
+      setPhoto(fileUrl); // Set the photo URL
+      setIsUploading(false);
     } catch (error) {
       console.error('Error uploading image:', error);
+      setIsUploading(false);
     }
   };
 
@@ -72,6 +95,7 @@ function TeacherForm({ setTeachers }) {
           className="mt-1 block w-full"
           onChange={handleImageUpload}  // Handle file upload
         />
+        {isUploading && <p className="text-sm text-gray-500 mt-1">Uploading image...</p>}
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700">Rating</label>
@@ -81,13 +105,16 @@ function TeacherForm({ setTeachers }) {
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
           placeholder="Enter teacher rating"
+          min="0"
+          max="5"
         />
       </div>
       <button
         type="submit"
         className="w-full bg-blue-500 text-white py-2 rounded-md shadow hover:bg-blue-600"
+        disabled={isUploading}
       >
-        Add Teacher
+        {isUploading ? 'Uploading...' : 'Add Teacher'}
       </button>
     </form>
   );

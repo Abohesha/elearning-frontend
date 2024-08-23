@@ -1,17 +1,25 @@
 import React from 'react';
 
-const StarRating = ({ rating }) => {
-  const stars = [];
-  for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
-      stars.push(<i key={i} className="fas fa-star text-yellow-500"></i>); // Full star
-    } else if (i - rating < 1) {
-      stars.push(<i key={i} className="fas fa-star-half-alt text-yellow-500"></i>); // Half star
-    } else {
-      stars.push(<i key={i} className="far fa-star text-yellow-500"></i>); // Empty star
+const StarRating = ({ rating, onRatingChange }) => {
+  const handleClick = (index) => {
+    if (onRatingChange) {
+      onRatingChange(index + 1); 
     }
-  }
-  return <div className="star-rating">{stars}</div>;
+  };
+
+  return (
+    <div className="star-rating">
+      {[...Array(5)].map((star, index) => (
+        <span
+          key={index}
+          className={`star ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+          onClick={() => handleClick(index)}
+        >
+          &#9733;
+        </span>
+      ))}
+    </div>
+  );
 };
 
 export default StarRating;

@@ -4,10 +4,11 @@ import axios from 'axios';
 import StarRating from './StarRating';
 
 function TeacherProfile() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [teacher, setTeacher] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [newRating, setNewRating] = useState(0);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -37,31 +38,35 @@ function TeacherProfile() {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!newComment.trim()) return;
+    if (!newComment.trim() || newRating === 0) return; // Ensure rating is selected
 
     try {
       const response = await axios.post(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`, {
         text: newComment,
+        rating: newRating, // Include the rating in the request body
       });
       setComments((prevComments) => [...prevComments, response.data]);
-      setNewComment(''); // Clear the comment input field after submission
+      setNewComment('');
+      setNewRating(0); // Reset rating after submission
+
+      // Re-fetch the teacher to get the updated rating
+      const updatedTeacher = await axios.get(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}`);
+      setTeacher(updatedTeacher.data);
     } catch (error) {
       console.error('Error posting comment', error);
     }
-  };
+};
+
 
   if (error) return <p>{error}</p>;
   if (!teacher) return <p>Loading...</p>;
-
-  // Log the image URL to the console outside JSX
-  console.log(teacher.photo ? `https://elearning-backend-gcsf.onrender.com${teacher.photo}` : '/path/to/default/image.jpg');
 
   return (
     <div className="teacher-profile p-6">
       <div className="teacher-details flex">
         <div className="flex-shrink-0">
           <img
-            src={teacher.photo ? `https://elearning-backend-gcsf.onrender.com${teacher.photo}` : '/path/to/default/image.jpg'}
+            src={teacher.photo ? teacher.photo : '/path/to/default/image.jpg'}
             alt={teacher.name}
             className="w-full h-auto max-w-sm object-cover rounded-md"
           />
@@ -71,6 +76,7 @@ function TeacherProfile() {
           <p className="text-gray-600 mt-2">{teacher.description}</p>
           <div className="text-gray-800 mt-4">
             <StarRating rating={teacher.rating} /> 
+            <p>Average Rating: {teacher.rating.toFixed(1)}</p>
           </div>
         </div>
       </div>
@@ -80,7 +86,8 @@ function TeacherProfile() {
         <ul className="space-y-4">
           {comments.map((comment) => (
             <li key={comment._id} className="bg-gray-100 p-4 rounded-md shadow">
-              {comment.text}
+              <p>{comment.text}</p>
+              <StarRating rating={comment.rating} />
             </li>
           ))}
         </ul>
@@ -93,9 +100,13 @@ function TeacherProfile() {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700">Your Rating</label>
+            <StarRating rating={newRating} onRatingChange={setNewRating} />
+          </div>
           <button
             type="submit"
-            className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600"
+            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600"
           >
             Submit
           </button>
