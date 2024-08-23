@@ -1,21 +1,15 @@
 import React from 'react';
 
 const StarRating = ({ rating, onRatingChange }) => {
-  const handleClick = (index) => {
-    if (onRatingChange) {
-      onRatingChange(index + 1); 
-    }
-  };
-
   return (
-    <div className="star-rating">
-      {[...Array(5)].map((star, index) => (
+    <div>
+      {Array.from({ length: 5 }, (_, index) => (
         <span
           key={index}
-          className={`star ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
-          onClick={() => handleClick(index)}
+          onClick={() => onRatingChange && onRatingChange(index + 1)}
+          style={{ cursor: onRatingChange ? 'pointer' : 'default', color: index < rating ? 'gold' : 'gray' }}
         >
-          &#9733;
+          ★
         </span>
       ))}
     </div>

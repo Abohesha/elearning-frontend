@@ -43,8 +43,9 @@ function TeacherProfile() {
     try {
       const response = await axios.post(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`, {
         text: newComment,
-        rating: newRating, // Include the rating in the request body
+        rating: newRating,
       });
+
       setComments((prevComments) => [...prevComments, response.data]);
       setNewComment('');
       setNewRating(0); // Reset rating after submission
@@ -55,8 +56,7 @@ function TeacherProfile() {
     } catch (error) {
       console.error('Error posting comment', error);
     }
-};
-
+  };
 
   if (error) return <p>{error}</p>;
   if (!teacher) return <p>Loading...</p>;
@@ -75,7 +75,7 @@ function TeacherProfile() {
           <h1 className="text-3xl font-semibold">{teacher.name}</h1>
           <p className="text-gray-600 mt-2">{teacher.description}</p>
           <div className="text-gray-800 mt-4">
-            <StarRating rating={teacher.rating} /> 
+            <StarRating rating={teacher.rating} />
             <p>Average Rating: {teacher.rating.toFixed(1)}</p>
           </div>
         </div>
