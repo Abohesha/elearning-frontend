@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import AdminDashboard from './Admin/AdminDashboard';
 import TeacherList from './components/TeacherList';
 import TeacherProfile from './components/TeacherProfile';
+import Footer from './components/Footer';
 import './App.css';
 import axios from 'axios';
 
@@ -48,7 +49,7 @@ function App() {
       <div className="App">
         <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
-            <Navbar.Brand href="/">E-Learning Platform</Navbar.Brand>
+            <Navbar.Brand href="/">XED Education</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
@@ -113,7 +114,7 @@ function App() {
                                     </div>
                                     <div className="card-body">
                                       <h5 className="card-title">{teacher.name}</h5>
-                                      <p className="card-text">{teacher.description}</p>
+                                     
                                     </div>
                                   </div>
                                 </Link>
@@ -144,12 +145,7 @@ function App() {
           <Route path="/teachers" element={<TeacherList />} />
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
-
-        <footer className="footer bg-dark text-white">
-          <Container>
-            <p>© 2024 E-Learning Platform. All rights reserved.</p>
-          </Container>
-        </footer>
+        <Footer/>
       </div>
     </Router>
   );

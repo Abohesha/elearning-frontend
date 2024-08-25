@@ -24,7 +24,6 @@ const TeacherCard = ({ teacher }) => {
         </div>
       )}
       <h2 className="text-xl font-semibold mt-4">{teacher.name}</h2>
-      <p className="text-gray-600 mt-2">{teacher.description}</p>
       <p className="text-gray-800 mt-2">Rating: <StarRating rating={teacher.rating} /></p>
       <h3 className="text-lg font-semibold mt-4">Subjects:</h3>
       <ul className="list-disc list-inside">

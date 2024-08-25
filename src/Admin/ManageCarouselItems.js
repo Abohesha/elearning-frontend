@@ -4,6 +4,7 @@ import CarouselItemForm from './CarouselItemForm';
 
 function ManageCarouselItems() {
   const [carouselItems, setCarouselItems] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const fetchCarouselItems = async () => {
@@ -27,9 +28,24 @@ function ManageCarouselItems() {
     }
   };
 
+  // Function to handle success message display
+  const handleImageUploadSuccess = () => {
+    setSuccessMessage('Image uploaded successfully!');
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 3000); // Clear the message after 3 seconds
+  };
+
   return (
     <div>
-      <CarouselItemForm setCarouselItems={setCarouselItems} />
+      {/* Display success message */}
+      {successMessage && (
+        <div className="bg-green-100 text-green-700 p-3 rounded-md mb-4">
+          {successMessage}
+        </div>
+      )}
+
+      <CarouselItemForm setCarouselItems={setCarouselItems} onImageUploadSuccess={handleImageUploadSuccess} />
       <ul className="mt-6 space-y-4">
         {carouselItems.map((item) => (
           <li

@@ -100,3 +100,28 @@
   color: #888;
   font-size: 1.5rem;
 }
+.carousel-container .carousel-item img {
+  width: 100%;
+  height: 500px; 
+  object-fit: cover;
+}
+
+.footer {
+  background-color: #343a40;
+  padding: 20px 0;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+}
+
+.footer-item a {
+  color: white;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.footer-item a:hover {
+  text-decoration: underline;
+}

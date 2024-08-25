@@ -1,41 +1,41 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CarouselItemForm({ setCarouselItems }) {
+function CarouselItemForm({ setCarouselItems, onImageUploadSuccess }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleImageUpload = async () => {
-    if (!image) return '';
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('image', file);
 
     try {
-      const res = await axios.post('https://elearning-backend-gcsf.onrender.com/api/upload', formData, {
+      const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      return res.data.imageUrl;  // Return the uploaded image URL
+      setImage(response.data.imageUrl);
+      if (onImageUploadSuccess) {
+        onImageUploadSuccess(); // Call the success handler
+      }
     } catch (error) {
-      console.error('Error uploading image', error);
-      return '';
+      console.error('Error uploading image:', error);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const imageUrl = await handleImageUpload();
-    if (!imageUrl) return;
+    const newItem = { title, description, imageUrl: image };
 
     try {
-      const newItem = { title, description, imageUrl };
       const response = await axios.post('https://elearning-backend-gcsf.onrender.com/api/carousel-items', newItem);
       setCarouselItems((prevItems) => [...prevItems, response.data]);
       setTitle('');
       setDescription('');
-      setImage(null);
+      setImage(null);  // Reset image after submission
     } catch (error) {
       console.error('Error adding carousel item', error);
     }
@@ -65,11 +65,11 @@ function CarouselItemForm({ setCarouselItems }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Image</label>
+        <label className="block text-sm font-medium text-gray-700">Upload Image</label>
         <input
           type="file"
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          onChange={(e) => setImage(e.target.files[0])}
+          className="mt-1 block w-full"
+          onChange={handleImageUpload}
         />
       </div>
       <button
