@@ -62,9 +62,6 @@ function App() {
                 <LinkContainer to="/teachers">
                   <Nav.Link>Teachers</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/admin">
-                  <Nav.Link>Admin</Nav.Link>
-                </LinkContainer>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -143,7 +140,7 @@ function App() {
           }/>
           <Route path="/teacher/:id" element={<TeacherProfile />} />
           <Route path="/teachers" element={<TeacherList />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin-abdelrahmanelsawaf" element={<AdminDashboard />} />
         </Routes>
         <Footer/>
       </div>

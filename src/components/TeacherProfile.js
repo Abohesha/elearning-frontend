@@ -38,7 +38,7 @@ function TeacherProfile() {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!newComment.trim() || newRating === 0) return; // Ensure rating is selected
+    
 
     try {
       const response = await axios.post(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`, {
@@ -74,10 +74,10 @@ function TeacherProfile() {
         <div className="ml-6">
           <h1 className="text-3xl font-semibold">{teacher.name}</h1>
           <p className="text-gray-600 mt-2">{teacher.description}</p>
-          {/*<div className="text-gray-800 mt-4">
+          <div className="text-gray-800 mt-4">
             <StarRating rating={teacher.rating} />
             <p>Average Rating: {teacher.rating.toFixed(1)}</p>
-          </div>*/}
+          </div>
         </div>
       </div>
 
@@ -87,7 +87,7 @@ function TeacherProfile() {
           {comments.map((comment) => (
             <li key={comment._id} className="bg-gray-100 p-4 rounded-md shadow">
               <p>{comment.text}</p>
-             {/* <StarRating rating={comment.rating} />*/} 
+              <StarRating rating={comment.rating} />
             </li>
           ))}
         </ul>
@@ -100,10 +100,10 @@ function TeacherProfile() {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
-          {/*<div className="mt-4">
+          <div className="mt-4">
             <label className="block text-sm font-medium text-gray-700">Your Rating</label>
             <StarRating rating={newRating} onRatingChange={setNewRating} />
-          </div>*/}
+          </div>
           <button
             type="submit"
             className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600"
