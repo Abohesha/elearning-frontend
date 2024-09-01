@@ -28,7 +28,6 @@ function ManageCarouselItems() {
     }
   };
 
-  // Function to handle success message display
   const handleImageUploadSuccess = () => {
     setSuccessMessage('Image uploaded successfully!');
     setTimeout(() => {
@@ -38,7 +37,6 @@ function ManageCarouselItems() {
 
   return (
     <div>
-      {/* Display success message */}
       {successMessage && (
         <div className="bg-green-100 text-green-700 p-3 rounded-md mb-4">
           {successMessage}

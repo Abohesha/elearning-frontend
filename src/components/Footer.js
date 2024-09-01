@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTelegram, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faTelegram, faInstagram, faGoogle, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
@@ -23,6 +23,12 @@ const Footer = () => {
           <a href="https://www.instagram.com/xed.ed?igsh=ZDVwaHVoeHhjbThy" target="_blank" rel="noopener noreferrer" className="text-white text-decoration-none">
             <FontAwesomeIcon icon={faInstagram} size="2x" className="me-2" />
             Instagram
+          </a>
+        </div>
+        <div className="footer-item">
+          <a href="https://wa.link/sxn97z" target="_blank" rel="noopener noreferrer" className="text-white text-decoration-none">
+            <FontAwesomeIcon icon={faWhatsapp} size="2x" className="me-2" />
+            WhatsApp
           </a>
         </div>
       </Container>
