@@ -38,7 +38,6 @@ function TeacherProfile() {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    
 
     try {
       const response = await axios.post(`https://elearning-backend-gcsf.onrender.com/api/teachers/${id}/comments`, {
@@ -62,27 +61,27 @@ function TeacherProfile() {
   if (!teacher) return <p>Loading...</p>;
 
   return (
-    <div className="teacher-profile p-6">
-      <div className="teacher-details flex">
-        <div className="flex-shrink-0">
+    <div className="teacher-profile p-4 sm:p-6">
+      <div className="teacher-details flex flex-col sm:flex-row">
+        <div className="flex-shrink-0 w-full sm:w-1/3">
           <img
             src={teacher.photo ? teacher.photo : '/path/to/default/image.jpg'}
             alt={teacher.name}
-            className="w-full h-auto max-w-sm object-cover rounded-md"
+            className="w-full h-auto object-cover rounded-md"
           />
         </div>
-        <div className="ml-6">
-          <h1 className="text-3xl font-semibold">{teacher.name}</h1>
-          <p className="text-gray-600 mt-2">{teacher.description}</p>
+        <div className="mt-4 sm:mt-0 sm:ml-6 flex-grow">
+          <h1 className="text-2xl sm:text-3xl font-semibold">{teacher.name}</h1>
+          <p className="text-gray-600 mt-2 text-base sm:text-lg">{teacher.description}</p>
           <div className="text-gray-800 mt-4">
             <StarRating rating={teacher.rating} />
-            <p>Average Rating: {teacher.rating.toFixed(1)}</p>
+            <p className="mt-1">Average Rating: {teacher.rating.toFixed(1)}</p>
           </div>
         </div>
       </div>
 
       <div className="comments-section mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Comments</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold mb-4">Comments</h2>
         <ul className="space-y-4">
           {comments.map((comment) => (
             <li key={comment._id} className="bg-gray-100 p-4 rounded-md shadow">
